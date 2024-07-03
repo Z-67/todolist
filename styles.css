@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar{
+    width: 25%;
+    background-color: rgb(77, 82, 82);
+    height: 100%;
+
+}
+
+h2 {
+    padding-top: 7vh;
+    font-weight: bold;
+    color: white;
+    font-family: calibri;
+    font-size: 3vw;
+    text-decoration: underline;
+    display: flex;
+    justify-content: center; 
+}
+
+.addProject {
+    background-color: rgb(77, 82, 82);
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 15px 32px; /* Some padding */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make the button inline-block */
+    font-size: 1vw; /* Increase font size */
+    margin: 2px; /* Add some margin */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    border-radius: 8px; /* Rounded corners */
+    position: relative; /* Make sure the pseudo-element is positioned relative to the button */
+    display: flex;
+    justify-self: end;
+}
+
+.addProject::before {
+    content: "+ ";
+    color: red; 
+    font-weight: bold; 
+    position: absolute;
+    left: 0.6vw; 
+    font-size: 1.2vw;
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+
+.addProject:hover {
+    background-color: rgb(166, 164, 164);
+}
