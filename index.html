@@ -13,9 +13,22 @@
         <button class="addProject">Add Project</button>
     </div>
 
-    <div class="container">
-
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal()">&times;</span>
+            <h2>Add New Project</h2>
+            <form id="projectForm">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+                
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+                
+                <button type="submit">Save</button>
+            </form>
+        </div>
     </div>
-    
+
+    <script src="script.js"></script>   
 </body>
 </html>
