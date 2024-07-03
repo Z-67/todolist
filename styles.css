@@ -30,17 +30,16 @@ h2 {
 
 .addProject {
     background-color: rgb(77, 82, 82);
-    border: none; /* Remove borders */
-    color: white; /* White text */
-    padding: 15px 32px; /* Some padding */
-    text-align: center; /* Center the text */
-    text-decoration: none; /* Remove underline */
-    display: inline-block; /* Make the button inline-block */
-    font-size: 1vw; /* Increase font size */
-    margin: 2px; /* Add some margin */
-    cursor: pointer; /* Add a pointer cursor on hover */
-    border-radius: 8px; /* Rounded corners */
-    position: relative; /* Make sure the pseudo-element is positioned relative to the button */
+    border: none; 
+    color: white;
+    padding: 15px 32px; 
+    text-align: center; 
+    display: inline-block; 
+    font-size: 1vw; 
+    margin: 2px; 
+    cursor: pointer; 
+    border-radius: 8px; 
+    position: relative; 
     display: flex;
     justify-self: end;
 }
@@ -62,25 +61,26 @@ h2 {
 
 
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    background-color: rgb(77, 82, 82);
+    margin: 7% auto; /* Center the modal vertically and horizontally */
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    border: 0.5vw solid #888;
+    width: 80%; /* Adjust width as needed */
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     position: relative;
+    height: 60%;
 }
 
 .close {
@@ -95,4 +95,41 @@ h2 {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.form-group {
+    margin-bottom: 10px; /* Adjust spacing between form groups */
+}
+
+label {
+    color: #e8e6e6; /* Grey color */
+    font-weight: bold;
+    display: block; /* Ensure labels are on separate lines */
+    margin-bottom: 5px; /* Adjust spacing between label and input/textarea */
+    font-size: 2vw;
+    font-family: calibri;
+}
+
+input, textarea {
+    width: 100%; /* Full width of the parent container */
+    padding: 8px; /* Adjust padding as needed */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 4px; /* Rounded corners */
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width */
+    font-size: 14px; /* Adjust font size */
+}
+
+button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding */
+    border: none; /* Remove border */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Adjust font size */
+    margin-top: 10px; /* Margin from the last form element */
+}
+
+button:hover {
+    background-color: #45a049; /* Darker green background on hover */
 }
