@@ -1,3 +1,4 @@
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
@@ -10,18 +11,17 @@ html, body {
     padding: 0;
 }
 
-.sidebar{
+.sidebar {
     width: 25%;
     background-color: rgb(77, 82, 82);
     height: 100%;
-
 }
 
 h2 {
     padding-top: 7vh;
     font-weight: bold;
     color: white;
-    font-family: calibri;
+    font-family: Calibri;
     font-size: 3vw;
     text-decoration: underline;
     display: flex;
@@ -59,7 +59,7 @@ h2 {
     background-color: rgb(166, 164, 164);
 }
 
-
+/* Modal Styles */
 .modal {
     display: none; 
     position: fixed; 
@@ -69,16 +69,16 @@ h2 {
     width: 100%; 
     height: 100%; 
     overflow: auto; 
-    background-color: rgba(0,0,0,0.4); 
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
     background-color: rgb(77, 82, 82);
-    margin: 7% auto; /* Center the modal vertically and horizontally */
-    padding: 20px;
+    margin: 7% auto; 
+    padding: 0.7vw;
     border: 0.5vw solid #888;
-    width: 80%; /* Adjust width as needed */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: 80%; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
     height: 60%;
 }
@@ -86,7 +86,7 @@ h2 {
 .close {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 2vw;
     font-weight: bold;
 }
 
@@ -97,39 +97,75 @@ h2 {
     cursor: pointer;
 }
 
+/* Form Styles */
 .form-group {
-    margin-bottom: 10px; /* Adjust spacing between form groups */
+    margin-bottom: 1.5vh; 
 }
 
 label {
-    color: #e8e6e6; /* Grey color */
+    color: #e8e6e6; 
     font-weight: bold;
-    display: block; /* Ensure labels are on separate lines */
-    margin-bottom: 5px; /* Adjust spacing between label and input/textarea */
+    display: block; 
     font-size: 2vw;
-    font-family: calibri;
+    font-family: Calibri;
 }
 
 input, textarea {
-    width: 100%; /* Full width of the parent container */
-    padding: 8px; /* Adjust padding as needed */
-    border: 1px solid #ccc; /* Border style */
-    border-radius: 4px; /* Rounded corners */
-    box-sizing: border-box; /* Ensure padding and border are included in the element's total width */
-    font-size: 14px; /* Adjust font size */
+    width: 100%; 
+    padding: 0.4vw; 
+    border: 0.1vw solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    font-size: 1.5vw;
 }
 
 button {
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Padding */
-    border: none; /* Remove border */
-    cursor: pointer; /* Pointer cursor on hover */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 14px; /* Adjust font size */
-    margin-top: 10px; /* Margin from the last form element */
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 0.4vw 0.6vw; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 0.3vw; 
+    font-size: 1vw; 
+    margin-top: 10px;
+    margin-bottom: 20px; 
 }
 
 button:hover {
-    background-color: #45a049; /* Darker green background on hover */
+    background-color: #45a049;
+}
+
+/* Project List Styles */
+#projectList {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 20px 0; 
+}
+
+#projectList li {
+    background-color: rgb(77, 82, 82);
+    padding: 10px; 
+    margin-bottom: 10px; 
+    border-radius: 4px; 
+    font-size: 2em; 
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    color: #e8e6e6;
+    font-family: Calibri;
+}
+
+#projectList li:hover {
+    background-color: rgb(166, 164, 164);
+}
+
+.bin-icon {
+    color: red; 
+    cursor: pointer; 
+    font-size: 1em; 
+    margin-left: auto;
+}
+
+.bin-icon:hover {
+    color: darkred;
 }
