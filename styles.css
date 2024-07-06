@@ -11,19 +11,60 @@ html, body {
     padding: 0;
 }
 
+.container {
+    display: flex;
+    height: 100%;
+}
+
 .sidebar {
     width: 25%;
     background-color: rgb(77, 82, 82);
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
-h2 {
-    padding-top: 7vh;
+.mainContent {
+    flex-grow: 1;
+    background-color: #2f3437;
+    color: white;
+    font-family: calibri;
+    padding: 2vw;
+}
+
+.mainContent h1 {
+    font-size: 3em;
+}
+
+.projectDescription {
+
+}
+
+.p {
+    height: 1px;
+    width: 80%;
+    margin: 2vw auto;
+}
+
+.pd {
+    margin-top: 3.2vh;
+}
+
+.sidebar h2 {
+    padding-top: 10vh;
     font-weight: bold;
     color: white;
     font-family: Calibri;
-    font-size: 3vw;
-    text-decoration: underline;
+    font-size: 2.5vw;
+    display: flex;
+    justify-content: center; 
+}
+
+.modal-content h2 {
+    font-weight: bold;
+    color: white;
+    font-family: Calibri;
+    font-size: 2.5vw;
     display: flex;
     justify-content: center; 
 }
@@ -35,7 +76,7 @@ h2 {
     padding: 15px 32px; 
     text-align: center; 
     display: inline-block; 
-    font-size: 1vw; 
+    font-size: 1.5vw; 
     margin: 2px; 
     cursor: pointer; 
     border-radius: 8px; 
@@ -127,8 +168,6 @@ button {
     cursor: pointer; 
     border-radius: 0.3vw; 
     font-size: 1vw; 
-    margin-top: 10px;
-    margin-bottom: 20px; 
 }
 
 button:hover {
@@ -163,7 +202,7 @@ button:hover {
     color: red; 
     cursor: pointer; 
     font-size: 1em; 
-    margin-left: auto;
+    
 }
 
 .bin-icon:hover {

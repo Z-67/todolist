@@ -20,26 +20,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     projectForm.addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting the traditional way
+        event.preventDefault(); 
 
-        // Get the project name and description
         var title = document.getElementById('title').value;
         var description = document.getElementById('description').value;
 
-        // Create a new list item for the project
         var li = document.createElement('li');
         li.innerHTML = `${title} <i class="fas fa-trash bin-icon"></i>`;
 
-        // Append the new project to the project list
         projectList.appendChild(li);
 
-        // Clear the form fields
         projectForm.reset();
 
-        // Close the modal
         modal.style.display = 'none';
 
-        // Add event listener to the bin icon
         li.querySelector('.bin-icon').addEventListener('click', function() {
             projectList.removeChild(li);
         });

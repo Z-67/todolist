@@ -8,12 +8,21 @@
     <title>To do list</title>
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Projects</h2>
-        <button class="addProject">Add Project</button>
-        <ul id="projectList"></ul>
-    </div>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Projects</h2>
+            <hr class="p">
+            <button class="addProject">Add Project</button>
+            <ul id="projectList"></ul>
+        </div>
 
+        <div class="mainContent">
+            <h1 class="projectTitle">Example Project</h1>
+            <p class="projectDescription">An Example Project</p>
+            <hr class="pd">
+        </div>
+    </div>   
+    
     <div id="projectModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeProjectModal()">&times;</span>
@@ -28,12 +37,10 @@
                     <label for="description">Project Description:</label>
                     <textarea id="description" name="description" rows="4" required></textarea>
                 </div>
-                
                 <button type="submit">Save</button>
             </form>
         </div>
     </div>
-
     <script src="script.js"></script>   
 </body>
 </html>
