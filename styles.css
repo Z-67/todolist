@@ -36,8 +36,8 @@ html, body {
     font-size: 3em;
 }
 
-.projectDescription {
-
+#description {
+    font-family: calibri;
 }
 
 .p {
@@ -91,7 +91,7 @@ html, body {
     font-weight: bold; 
     position: absolute;
     left: 0.6vw; 
-    font-size: 1.2vw;
+    font-size: 1.8vw;
     top: 50%; 
     transform: translateY(-50%); 
 }
@@ -99,6 +99,28 @@ html, body {
 .addProject:hover {
     background-color: rgb(166, 164, 164);
 }
+
+.projectButton {
+    color: #ccc;
+    padding: 1vw 2vw;
+    margin: 1vw 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-radius: 0.4vw;
+    cursor: pointer;
+    position: relative;
+    font-family: calibri;
+    font-weight: 600;
+    font-size: 2vw;
+}
+
+.projectButton.selected {
+    background-color: rgba(255, 255, 255, 0.5); 
+    color: white;
+}
+
 
 /* Modal Styles */
 .modal {
@@ -208,3 +230,19 @@ button:hover {
 .bin-icon:hover {
     color: darkred;
 }
+
+.title-edit-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit {
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.edit:hover{
+    text-decoration: underline;
+}
+

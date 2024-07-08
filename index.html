@@ -12,20 +12,29 @@
         <div class="sidebar">
             <h2>Projects</h2>
             <hr class="p">
+            <div id="exampleProject" class="projectButton selected">
+                <span>Example Project</span>
+                <span class="bin-icon"><i class="fas fa-trash"></i></span>
+            </div>
             <button class="addProject">Add Project</button>
             <ul id="projectList"></ul>
         </div>
 
         <div class="mainContent">
-            <h1 class="projectTitle">Example Project</h1>
-            <p class="projectDescription">An Example Project</p>
-            <hr class="pd">
+            <div id="projectInfo">
+                <div class="title-edit-container">
+                    <h1 id="projectTitle">Example Project</h1>
+                    <div class="edit">Edit &#9998;</div>
+                </div>
+                <p id="projectDescription">This is an example project description.</p>
+                <hr class="pd">
+            </div>
         </div>
     </div>   
     
     <div id="projectModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeProjectModal()">&times;</span>
+            <span class="close">&times;</span>
             <h2>Add New Project</h2>
             <form id="projectForm">
                 <div class="form-group">
