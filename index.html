@@ -5,33 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>To do list</title>
+    <title>To Do List</title>
 </head>
 <body>
     <div class="container">
         <div class="sidebar">
             <h2>Projects</h2>
             <hr class="p">
-            <div id="exampleProject" class="projectButton selected">
-                <span>Example Project</span>
-                <span class="bin-icon"><i class="fas fa-trash"></i></span>
-            </div>
+            <ul id="projectList" class="project-list"></ul>
             <button class="addProject">Add Project</button>
-            <ul id="projectList"></ul>
         </div>
 
         <div class="mainContent">
             <div id="projectInfo">
                 <div class="title-edit-container">
-                    <h1 id="projectTitle">Example Project</h1>
+                    <h1 id="projectTitle">Select a project</h1>
                     <div class="edit">Edit &#9998;</div>
                 </div>
-                <p id="projectDescription">This is an example project description.</p>
+                <p id="projectDescription">Project description will appear here.</p>
                 <hr class="pd">
             </div>
         </div>
-    </div>   
-    
+    </div>
+
     <div id="projectModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -50,6 +46,7 @@
             </form>
         </div>
     </div>
-    <script src="script.js"></script>   
+
+    <script src="script.js"></script>
 </body>
 </html>
