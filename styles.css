@@ -85,6 +85,38 @@ html, body {
     justify-self: end;
 }
 
+.addTask{
+    background-color: #2f3437;
+    border: none; 
+    color: white;
+    padding: 15px 32px; 
+    text-align: center; 
+    display: inline-block; 
+    font-size: 1.5vw; 
+    margin: 2px; 
+    cursor: pointer; 
+    border-radius: 8px; 
+    position: relative; 
+    display: flex;
+    justify-self: end;
+}
+
+.addTask:hover{
+    background-color: rgb(166, 164, 164);
+
+}
+
+.addTask::before{
+    content: "+ ";
+    color: red; 
+    font-weight: bold; 
+    position: absolute;
+    left: 0.6vw; 
+    font-size: 1.8vw;
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+
 .addProject::before {
     content: "+ ";
     color: red; 
@@ -99,8 +131,6 @@ html, body {
 .addProject:hover {
     background-color: rgb(166, 164, 164);
 }
-
-
 
 .projectButton.selected {
     background-color: rgba(255, 255, 255, 0.5); 
@@ -177,9 +207,6 @@ button {
     font-size: 1vw; 
 }
 
-button:hover {
-    background-color: #45a049;
-}
 
 /* Project List Styles */
 #projectList {
@@ -190,7 +217,7 @@ button:hover {
 }
 
 #projectList li {
-    color: #ccc;
+    color: #ffffff;
     padding: 1vw 2vw;
     margin: 1vw 0;
     display: flex;
@@ -205,20 +232,7 @@ button:hover {
     font-size: 2vw;
 }
 
-.projectButton {
-    color: #ccc;
-    padding: 1vw 2vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    border-radius: 0.4vw;
-    cursor: pointer;
-    position: relative;
-    font-family: calibri;
-    font-weight: 600;
-    font-size: 2vw;
-}
+
 
 #projectList li:hover {
     background-color: rgb(166, 164, 164);
