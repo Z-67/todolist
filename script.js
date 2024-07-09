@@ -8,6 +8,48 @@ document.addEventListener('DOMContentLoaded', function() {
     var projectDescription = document.getElementById('projectDescription');
     var editButton = document.querySelector('.edit');
     var projects = [];
+    var newProjectFormContainer = document.getElementById('newProjectFormContainer');
+
+    addProjectButton.addEventListener('click', function() {
+        if (newProjectFormContainer.style.display === 'block') {
+            newProjectFormContainer.style.display = 'none';
+        } else {
+            newProjectFormContainer.style.display = 'block';
+            renderNewProjectForm();
+        }
+    });
+
+    function renderNewProjectForm() {
+        newProjectFormContainer.innerHTML = `
+            <div class="form-group">
+                <label for="newProjectTitle">Project Name:</label>
+                <input type="text" id="newProjectTitle" name="newProjectTitle" required>
+            </div>
+            <div class="form-group">
+                <label for="newProjectDescription">Project Description:</label>
+                <input type="text" id="newProjectDescription" name="newProjectDescription" required>
+            </div>
+            <button class="submit-btn" id="submitNewProject">Submit</button>
+            <button class="cancel-btn" id="cancelNewProject">Cancel</button>
+        `;
+
+        document.getElementById('submitNewProject').addEventListener('click', function() {
+            var title = document.getElementById('newProjectTitle').value;
+            var description = document.getElementById('newProjectDescription').value;
+
+            if (title && description) {
+                addNewProject(title, description);
+                newProjectFormContainer.style.display = 'none';
+                newProjectFormContainer.innerHTML = '';
+            }
+        });
+
+        document.getElementById('cancelNewProject').addEventListener('click', function() {
+            newProjectFormContainer.style.display = 'none';
+            newProjectFormContainer.innerHTML = '';
+        });
+    }
+
 
     function saveProjects() {
         localStorage.setItem('projects', JSON.stringify(projects));
@@ -111,7 +153,6 @@ document.addEventListener('DOMContentLoaded', function() {
         modal.style.display = 'none';
     });
 
-    // Edit functionality
     editButton.addEventListener('click', function() {
         var selectedProjectId = document.querySelector('.projectButton.selected')?.dataset.id;
         if (!selectedProjectId) return;
@@ -162,5 +203,106 @@ document.addEventListener('DOMContentLoaded', function() {
         projects.forEach(addProjectToList);
     }
 
+    loadProjects();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var addTaskButton = document.querySelector('.addTask');
+    var taskFormContainer = document.getElementById('taskFormContainer');
+    var taskList = document.getElementById('taskList');
+    var selectedProjectId = null;
+    var projects = JSON.parse(localStorage.getItem('projects')) || [];
+
+    addTaskButton.addEventListener('click', function() {
+        if (taskFormContainer.style.display === 'block') {
+            taskFormContainer.style.display = 'none';
+        } else {
+            taskFormContainer.style.display = 'block';
+            renderNewTaskForm();
+        }
+    });
+
+    function renderNewTaskForm() {
+        taskFormContainer.innerHTML = `
+            <div class="form-group">
+                <label for="newTaskTitle">Task Name:</label>
+                <input type="text" id="newTaskTitle" name="newTaskTitle" required>
+            </div>
+            <button class="submit-btn" id="submitNewTask">Submit</button>
+            <button class="cancel-btn" id="cancelNewTask">Cancel</button>
+        `;
+
+        document.getElementById('submitNewTask').addEventListener('click', function() {
+            var title = document.getElementById('newTaskTitle').value;
+
+            if (title) {
+                addNewTask(title);
+                taskFormContainer.style.display = 'none';
+                taskFormContainer.innerHTML = '';
+            }
+        });
+
+        document.getElementById('cancelNewTask').addEventListener('click', function() {
+            taskFormContainer.style.display = 'none';
+            taskFormContainer.innerHTML = '';
+        });
+    }
+
+    function addNewTask(title) {
+        var task = {
+            id: Date.now(),
+            title: title
+        };
+
+        var project = projects.find(p => p.id === selectedProjectId);
+        if (project) {
+            project.tasks.push(task);
+            saveProjects();
+            renderTaskList(project.tasks);
+        }
+    }
+
+    function removeTask(taskId) {
+        var project = projects.find(p => p.id === selectedProjectId);
+        if (project) {
+            project.tasks = project.tasks.filter(task => task.id !== taskId);
+            saveProjects();
+            renderTaskList(project.tasks);
+        }
+    }
+
+    function renderTaskList(tasks) {
+        taskList.innerHTML = '';
+
+        tasks.forEach(task => {
+            var li = document.createElement('li');
+            li.dataset.id = task.id;
+            li.textContent = task.title;
+
+            var binIcon = document.createElement('span');
+            binIcon.classList.add('bin-icon');
+            binIcon.innerHTML = '<i class="fas fa-trash"></i>';
+            binIcon.addEventListener('click', function(event) {
+                event.stopPropagation();
+                removeTask(task.id);
+            });
+
+            li.appendChild(binIcon);
+            taskList.appendChild(li);
+        });
+    }
+
+    function saveProjects() {
+        localStorage.setItem('projects', JSON.stringify(projects));
+    }
+
+    function loadProjects() {
+        var storedProjects = localStorage.getItem('projects');
+        if (storedProjects) {
+            projects = JSON.parse(storedProjects);
+        }
+    }
+
+    // Initial load
     loadProjects();
 });
