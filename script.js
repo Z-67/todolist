@@ -7,49 +7,90 @@ document.addEventListener('DOMContentLoaded', function() {
     var projectTitle = document.getElementById('projectTitle');
     var projectDescription = document.getElementById('projectDescription');
     var editButton = document.querySelector('.edit');
-    var projects = [];
-    var newProjectFormContainer = document.getElementById('newProjectFormContainer');
+    var addTaskButton = document.querySelector('.addTask');
+    var taskFormContainer = document.getElementById('taskFormContainer');
+    var taskList = document.getElementById('taskList');
+    var selectedProjectId = null;
+    var projects = JSON.parse(localStorage.getItem('projects')) || [];
 
+    // Handle add project button click
     addProjectButton.addEventListener('click', function() {
-        if (newProjectFormContainer.style.display === 'block') {
-            newProjectFormContainer.style.display = 'none';
-        } else {
-            newProjectFormContainer.style.display = 'block';
-            renderNewProjectForm();
+        modal.style.display = 'block';
+    });
+
+    closeButton.addEventListener('click', function() {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
         }
     });
 
-    function renderNewProjectForm() {
-        newProjectFormContainer.innerHTML = `
+    projectForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var title = document.getElementById('title').value;
+        var description = document.getElementById('description').value;
+
+        var project = {
+            id: Date.now(),
+            title: title,
+            description: description,
+            tasks: []
+        };
+
+        projects.push(project);
+        saveProjects();
+        addProjectToList(project);
+
+        projectForm.reset();
+        modal.style.display = 'none';
+    });
+
+    // New code for adding tasks
+    function renderNewTaskForm() {
+        taskFormContainer.innerHTML = `
             <div class="form-group">
-                <label for="newProjectTitle">Project Name:</label>
-                <input type="text" id="newProjectTitle" name="newProjectTitle" required>
+                <label for="newTaskTitle">Task Name:</label>
+                <input type="text" id="newTaskTitle" name="newTaskTitle" required>
             </div>
-            <div class="form-group">
-                <label for="newProjectDescription">Project Description:</label>
-                <input type="text" id="newProjectDescription" name="newProjectDescription" required>
-            </div>
-            <button class="submit-btn" id="submitNewProject">Submit</button>
-            <button class="cancel-btn" id="cancelNewProject">Cancel</button>
+            <button class="submit-btn" id="submitNewTask">Submit</button>
+            <button class="cancel-btn" id="cancelNewTask">Cancel</button>
         `;
 
-        document.getElementById('submitNewProject').addEventListener('click', function() {
-            var title = document.getElementById('newProjectTitle').value;
-            var description = document.getElementById('newProjectDescription').value;
+        document.getElementById('submitNewTask').addEventListener('click', function(event) {
+            event.preventDefault();
+            var title = document.getElementById('newTaskTitle').value.trim();
 
-            if (title && description) {
-                addNewProject(title, description);
-                newProjectFormContainer.style.display = 'none';
-                newProjectFormContainer.innerHTML = '';
+            if (title) {
+                addNewTask(title);
+                taskFormContainer.style.display = 'none';
+                taskFormContainer.innerHTML = '';
             }
         });
 
-        document.getElementById('cancelNewProject').addEventListener('click', function() {
-            newProjectFormContainer.style.display = 'none';
-            newProjectFormContainer.innerHTML = '';
+        document.getElementById('cancelNewTask').addEventListener('click', function() {
+            taskFormContainer.style.display = 'none';
+            taskFormContainer.innerHTML = '';
         });
     }
 
+    function addNewTask(title) {
+        var task = {
+            id: Date.now(),
+            title: title
+        };
+
+        var project = projects.find(p => p.id === selectedProjectId);
+        if (project) {
+            project.tasks = project.tasks || [];
+            project.tasks.push(task);
+            saveProjects();
+            renderTaskList(project.tasks);
+        }
+    }
 
     function saveProjects() {
         localStorage.setItem('projects', JSON.stringify(projects));
@@ -99,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function selectProject(id) {
+        selectedProjectId = id;
         var project = projects.find(function(project) {
             return project.id === id;
         });
@@ -111,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             projectTitle.textContent = project.title;
             projectDescription.textContent = project.description;
+            renderTaskList(project.tasks);
         }
     }
 
@@ -119,39 +162,10 @@ document.addEventListener('DOMContentLoaded', function() {
         projectDescription.textContent = 'Project description will appear here.';
     }
 
-    addProjectButton.addEventListener('click', function() {
-        modal.style.display = 'block';
-    });
-
-    closeButton.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', function(event) {
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    });
-
-    projectForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        var title = document.getElementById('title').value;
-        var description = document.getElementById('description').value;
-
-        var project = {
-            id: Date.now(),
-            title: title,
-            description: description
-        };
-
-        projects.push(project);
-        saveProjects();
-        addProjectToList(project);
-
-        projectForm.reset();
-        modal.style.display = 'none';
-    });
+    function renderProjects() {
+        projectList.innerHTML = '';
+        projects.forEach(addProjectToList);
+    }
 
     editButton.addEventListener('click', function() {
         var selectedProjectId = document.querySelector('.projectButton.selected')?.dataset.id;
@@ -198,21 +212,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    function renderProjects() {
-        projectList.innerHTML = '';
-        projects.forEach(addProjectToList);
-    }
-
-    loadProjects();
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    var addTaskButton = document.querySelector('.addTask');
-    var taskFormContainer = document.getElementById('taskFormContainer');
-    var taskList = document.getElementById('taskList');
-    var selectedProjectId = null;
-    var projects = JSON.parse(localStorage.getItem('projects')) || [];
-
     addTaskButton.addEventListener('click', function() {
         if (taskFormContainer.style.display === 'block') {
             taskFormContainer.style.display = 'none';
@@ -222,43 +221,68 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    function renderNewTaskForm() {
-        taskFormContainer.innerHTML = `
-            <div class="form-group">
-                <label for="newTaskTitle">Task Name:</label>
-                <input type="text" id="newTaskTitle" name="newTaskTitle" required>
-            </div>
-            <button class="submit-btn" id="submitNewTask">Submit</button>
-            <button class="cancel-btn" id="cancelNewTask">Cancel</button>
-        `;
+    function renderTaskList(tasks) {
+        taskList.innerHTML = '';
 
-        document.getElementById('submitNewTask').addEventListener('click', function() {
-            var title = document.getElementById('newTaskTitle').value;
+        tasks.forEach(task => {
+            var li = document.createElement('li');
+            li.classList.add('task-item');
+            li.dataset.id = task.id;
 
-            if (title) {
-                addNewTask(title);
-                taskFormContainer.style.display = 'none';
-                taskFormContainer.innerHTML = '';
-            }
-        });
+            var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.classList.add('task-checkbox', 'float-left'); 
 
-        document.getElementById('cancelNewTask').addEventListener('click', function() {
-            taskFormContainer.style.display = 'none';
-            taskFormContainer.innerHTML = '';
+            var titleSpan = document.createElement('span');
+            titleSpan.textContent = task.title;
+            titleSpan.classList.add('task-title');
+
+            var editIcon = document.createElement('span');
+            editIcon.classList.add('edit-icon');
+            editIcon.innerHTML = '<i class="fas fa-pen"></i>';
+            editIcon.addEventListener('click', function() {
+                editTask(task.id);
+            });
+
+            var binIcon = document.createElement('span');
+            binIcon.classList.add('bin-icon');
+            binIcon.innerHTML = '<i class="fas fa-trash"></i>';
+            binIcon.addEventListener('click', function(event) {
+                event.stopPropagation();
+                removeTask(task.id);
+            });
+
+            li.appendChild(checkbox);
+            li.appendChild(titleSpan);
+            li.appendChild(editIcon);
+            li.appendChild(binIcon);
+            taskList.appendChild(li);
         });
     }
 
-    function addNewTask(title) {
-        var task = {
-            id: Date.now(),
-            title: title
-        };
-
+    function editTask(taskId) {
         var project = projects.find(p => p.id === selectedProjectId);
         if (project) {
-            project.tasks.push(task);
-            saveProjects();
-            renderTaskList(project.tasks);
+            var task = project.tasks.find(t => t.id === taskId);
+            var taskItem = document.querySelector(`li[data-id='${taskId}']`);
+            taskItem.innerHTML = `
+                <input type="text" value="${task.title}" class="edit-task-input">
+                <button class="submit-task-edit">Save</button>
+                <button class="cancel-task-edit">Cancel</button>
+            `;
+
+            taskItem.querySelector('.submit-task-edit').addEventListener('click', function() {
+                var newTitle = taskItem.querySelector('.edit-task-input').value.trim();
+                if (newTitle) {
+                    task.title = newTitle;
+                    saveProjects();
+                    renderTaskList(project.tasks);
+                }
+            });
+
+            taskItem.querySelector('.cancel-task-edit').addEventListener('click', function() {
+                renderTaskList(project.tasks);
+            });
         }
     }
 
@@ -271,38 +295,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function renderTaskList(tasks) {
-        taskList.innerHTML = '';
-
-        tasks.forEach(task => {
-            var li = document.createElement('li');
-            li.dataset.id = task.id;
-            li.textContent = task.title;
-
-            var binIcon = document.createElement('span');
-            binIcon.classList.add('bin-icon');
-            binIcon.innerHTML = '<i class="fas fa-trash"></i>';
-            binIcon.addEventListener('click', function(event) {
-                event.stopPropagation();
-                removeTask(task.id);
-            });
-
-            li.appendChild(binIcon);
-            taskList.appendChild(li);
-        });
-    }
-
-    function saveProjects() {
-        localStorage.setItem('projects', JSON.stringify(projects));
-    }
-
-    function loadProjects() {
-        var storedProjects = localStorage.getItem('projects');
-        if (storedProjects) {
-            projects = JSON.parse(storedProjects);
-        }
-    }
-
-    // Initial load
     loadProjects();
 });
