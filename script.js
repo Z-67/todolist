@@ -223,27 +223,36 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderTaskList(tasks) {
         taskList.innerHTML = '';
-
+    
         tasks.forEach(task => {
             var li = document.createElement('li');
             li.classList.add('task-item');
             li.dataset.id = task.id;
-
+    
+            var taskLeftDiv = document.createElement('div');
+            taskLeftDiv.classList.add('task-left');
+    
             var checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
-            checkbox.classList.add('task-checkbox', 'float-left'); 
-
+            checkbox.classList.add('task-checkbox'); 
+    
             var titleSpan = document.createElement('span');
             titleSpan.textContent = task.title;
             titleSpan.classList.add('task-title');
-
+    
+            taskLeftDiv.appendChild(checkbox);
+            taskLeftDiv.appendChild(titleSpan);
+    
+            var taskIconsDiv = document.createElement('div');
+            taskIconsDiv.classList.add('task-icons');
+    
             var editIcon = document.createElement('span');
             editIcon.classList.add('edit-icon');
             editIcon.innerHTML = '<i class="fas fa-pen"></i>';
             editIcon.addEventListener('click', function() {
                 editTask(task.id);
             });
-
+    
             var binIcon = document.createElement('span');
             binIcon.classList.add('bin-icon');
             binIcon.innerHTML = '<i class="fas fa-trash"></i>';
@@ -251,14 +260,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.stopPropagation();
                 removeTask(task.id);
             });
+    
+            taskIconsDiv.appendChild(binIcon);
+            taskIconsDiv.appendChild(editIcon);
 
-            li.appendChild(checkbox);
-            li.appendChild(titleSpan);
-            li.appendChild(editIcon);
-            li.appendChild(binIcon);
+    
+            li.appendChild(taskLeftDiv);
+            li.appendChild(taskIconsDiv);
             taskList.appendChild(li);
         });
     }
+    
 
     function editTask(taskId) {
         var project = projects.find(p => p.id === selectedProjectId);

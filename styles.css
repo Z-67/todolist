@@ -33,7 +33,7 @@ html, body {
 }
 
 .mainContent h1 {
-    font-size: 3em;
+    font-size: 3.5vw;
 }
 
 #description {
@@ -241,7 +241,7 @@ button {
     color: red; 
     cursor: pointer; 
     font-size: 1em; 
-    
+    margin-left: 1vw;
 }
 
 .bin-icon:hover {
@@ -255,7 +255,7 @@ button {
 }
 
 .edit {
-    font-size: 1.5em;
+    font-size: 3vw;
     cursor: pointer;
 }
 
@@ -299,7 +299,6 @@ button {
 
 /* Additional Styles for Task Form and List */
 .task-item {
-    display: flex;
     align-items: center;
     background-color: #4d5252;
     color: white;
@@ -307,22 +306,29 @@ button {
     margin: 1vw 0;
     border-radius: 8px;
     font-size: 1.2em;
-    justify-self: space-between;
+
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    position:relative;
 }
 
 .task-checkbox {
-    margin-right: 11vw;
-float: left;
+   float: left;
+   position: absolute;
+   right: 38vw;
+   font-size: 5em;
 }
 
 .task-title {
-    flex-grow: 1;
     width: 100%;
 }
 
 .edit-icon,
 .bin-icon {
-    margin-left: 1vw;
+    float: right;
     cursor: pointer;
 }
 
@@ -400,5 +406,26 @@ float: left;
 
 #taskList li:hover {
     background-color: rgb(166, 164, 164);
+}
+
+/* Container for task items */
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Container for task details on the left */
+.task-left {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* This ensures task-left takes the remaining space */
+}
+
+/* Styling for task title */
+.task-title {
+    margin-left: 10px;
 }
 
