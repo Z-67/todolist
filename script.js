@@ -260,9 +260,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 event.stopPropagation();
                 removeTask(task.id);
             });
-    
-            taskIconsDiv.appendChild(binIcon);
             taskIconsDiv.appendChild(editIcon);
+            taskIconsDiv.appendChild(binIcon);
+
 
     
             li.appendChild(taskLeftDiv);

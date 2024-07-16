@@ -24,12 +24,19 @@ html, body {
     flex-direction: column;
 }
 
+
 .mainContent {
-    flex-grow: 1;
+    flex: 1;
     background-color: #2f3437;
     color: white;
     font-family: calibri;
     padding: 2vw;
+    height: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    box-sizing: border-box;
+
 }
 
 .mainContent h1 {
@@ -47,7 +54,7 @@ html, body {
 }
 
 .pd {
-    margin-top: 3.2vh;
+    margin-top: 4vh;
 }
 
 .sidebar h2 {
@@ -80,8 +87,7 @@ html, body {
     cursor: pointer; 
     border-radius: 8px; 
     position: relative; 
-    display: flex;
-    justify-self: end;
+    height: 15vh;
 }
 
 .addTask{
@@ -189,8 +195,7 @@ label {
     font-family: Calibri;
 }
 
-input, textarea {
-    width: 100%; 
+input, textarea { 
     padding: 0.4vw; 
     border: 0.1vw solid #ccc; 
     border-radius: 4px; 
@@ -240,7 +245,7 @@ button {
 .bin-icon {
     color: red; 
     cursor: pointer; 
-    font-size: 1em; 
+    font-size: 2vw; 
     margin-left: 1vw;
 }
 
@@ -255,7 +260,7 @@ button {
 }
 
 .edit {
-    font-size: 3vw;
+    font-size: 1.5vw;
     cursor: pointer;
 }
 
@@ -264,7 +269,6 @@ button {
 }
 
 .editable-input {
-    width: 100%;
     padding: 0.5vw;
     margin: 1vw 0;
     font-size: 1em;
@@ -299,27 +303,25 @@ button {
 
 /* Additional Styles for Task Form and List */
 .task-item {
+    display: flex;
     align-items: center;
     background-color: #4d5252;
     color: white;
     padding: 1vw;
     margin: 1vw 0;
     border-radius: 8px;
-    font-size: 1.2em;
 
 }
 
-.task-item {
+.task-icons{
     display: flex;
-    align-items: center;
-    position:relative;
+    align-items: center; 
 }
 
 .task-checkbox {
-   float: left;
    position: absolute;
-   right: 38vw;
-   font-size: 5em;
+   left: 1%;
+   font-size: vw;
 }
 
 .task-title {
@@ -336,6 +338,16 @@ button {
 .bin-icon:hover {
     color: darkred;
 }
+
+.edit-task-input{
+    width: 100%;
+}
+
+#title, #description{
+    width: 100%;
+}
+
+
 
 #taskFormContainer {
     display: none; 
@@ -405,27 +417,16 @@ button {
 }
 
 #taskList li:hover {
-    background-color: rgb(166, 164, 164);
+    transform: scale(1.02);
 }
 
-/* Container for task items */
-.task-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    border-bottom: 1px solid #ccc;
-}
 
 /* Container for task details on the left */
 .task-left {
     display: flex;
     align-items: center;
-    flex-grow: 1; /* This ensures task-left takes the remaining space */
+    
 }
 
-/* Styling for task title */
-.task-title {
-    margin-left: 10px;
-}
+
 
